@@ -1,6 +1,6 @@
 // Sample projects - customize these with your own project names
 const projects = [
-    "Abstract Series",
+    "instagram",
     "Digital Art",
     "Portraits",
     "Landscapes",
@@ -44,11 +44,22 @@ function getRandomShape() {
     return shapes[Math.floor(Math.random() * shapes.length)];
 }
 
+// Shuffle array using Fisher-Yates algorithm
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 // Create project boxes
 function createProjectGrid() {
     const grid = document.getElementById('projectGrid');
+    const shuffledProjects = shuffleArray(projects);
 
-    projects.forEach((project) => {
+    shuffledProjects.forEach((project) => {
         const box = document.createElement('div');
         box.className = `project-box ${getRandomShape()}`;
         box.style.backgroundColor = getRandomColor();
@@ -61,7 +72,9 @@ function createProjectGrid() {
 
         // Add click event to navigate to project page
         box.addEventListener('click', () => {
-            if (project === "breathing website") {
+            if (project === "instagram") {
+                window.location.href = "https://www.instagram.com/matt.obj/";
+            } else if (project === "breathing website") {
                 window.location.href = "https://avgchild.github.io/Meditation-project/";
             } else if (project === "clay archive") {
                 window.location.href = "https://clayarchive.com";
