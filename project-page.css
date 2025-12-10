@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5dc;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.back-nav {
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(245, 245, 220, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.back-button:hover {
+    background-color: #555;
+}
+
+/* Split Layout */
+.project-container {
+    display: flex;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+/* Left Side - Image Carousel */
+.left-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 4 / 3;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.carousel-arrow {
+    background-color: rgba(51, 51, 51, 0.8);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(51, 51, 51, 1);
+    transform: scale(1.1);
+}
+
+.carousel-arrow:active {
+    transform: scale(0.95);
+}
+
+.carousel-arrow.hidden {
+    display: none;
+}
+
+/* Right Side - Text Content */
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 40px 40px 40px;
+}
+
+.project-header {
+    flex-shrink: 0;
+}
+
+.project-header h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.text-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.text-box {
+    width: 100%;
+}
+
+.text-box p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .project-container {
+        flex-direction: column;
+        height: auto;
+        padding-top: 70px;
+    }
+
+    .left-side {
+        padding: 30px 20px;
+        min-height: 50vh;
+    }
+
+    .right-side {
+        padding: 30px 20px;
+        min-height: 50vh;
+    }
+
+    .project-header h1 {
+        font-size: 2rem;
+    }
+
+    .text-box p {
+        font-size: 1rem;
+    }
+
+    .carousel-container {
+        max-width: 100%;
+    }
+}
