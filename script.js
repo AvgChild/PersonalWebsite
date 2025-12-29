@@ -5,7 +5,7 @@ const projects = [
     "Portraits",
     "Landscapes",
     "Mixed Media",
-    "Photography",
+    "form and perception @gcadd",
     "clay archive",
     "breathing website"
 ];
@@ -80,6 +80,8 @@ function createProjectGrid() {
                 window.location.href = "https://clayarchive.com";
             } else if (project === "Abstract Series") {
                 window.location.href = "projects/abstract-series.html";
+            } else if (project === "form and perception @gcadd") {
+                window.location.href = "projects/form-and-perception-gcadd.html";
             } else {
                 // For other projects, create pages following the same pattern
                 alert(`Opening ${project}...`);
