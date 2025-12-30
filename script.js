@@ -7,6 +7,7 @@ const projects = [
     "ceramic 3d printer",
     "definitely a painter",
     "jdz china",
+    "chair",
     "about",
     "contact info"
 ];
@@ -30,40 +31,32 @@ function getRandomColor() {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
-// Get a random geometric shape class
-function getRandomShape() {
-    const shapes = [
-        'shape-rounded-square',
-        'shape-circle',
-        'shape-blob',
-        'shape-octagon',
-        'shape-pentagon',
-        'shape-hexagon',
-        'shape-diamond',
-        'shape-trapezoid'
-    ];
-    return shapes[Math.floor(Math.random() * shapes.length)];
-}
-
-// Shuffle array using Fisher-Yates algorithm
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
+// Map project names to their image paths
+const projectImages = {
+    "form and perception @gcadd": "images/form-and-perception/image1.jpg",
+    "ceramic 3d printer": "images/ceramic-3d-printer/image1.jpg",
+    "definitely a painter": "images/definitely-a-painter/image1.jpg",
+    "jdz china": "images/jdz-china/image1.jpg",
+    "chair": "images/chair/image1.jpg"
+};
 
 // Create project boxes
 function createProjectGrid() {
     const grid = document.getElementById('projectGrid');
-    const shuffledProjects = shuffleArray(projects);
 
-    shuffledProjects.forEach((project) => {
+    projects.forEach((project) => {
         const box = document.createElement('div');
-        box.className = `project-box ${getRandomShape()}`;
+        box.className = 'project-box';
         box.style.backgroundColor = getRandomColor();
+
+        // Add thumbnail image if project has one
+        if (projectImages[project]) {
+            const thumbnail = document.createElement('img');
+            thumbnail.className = 'project-thumbnail';
+            thumbnail.src = projectImages[project];
+            thumbnail.alt = project;
+            box.appendChild(thumbnail);
+        }
 
         const text = document.createElement('div');
         text.className = 'project-text';
@@ -89,6 +82,8 @@ function createProjectGrid() {
                 window.location.href = "projects/definitely-a-painter.html";
             } else if (project === "jdz china") {
                 window.location.href = "projects/jdz-china.html";
+            } else if (project === "chair") {
+                window.location.href = "projects/chair.html";
             } else if (project === "about") {
                 window.location.href = "about.html";
             } else if (project === "contact info") {
