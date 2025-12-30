@@ -4,7 +4,9 @@
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(python:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
     ]
   }
 }

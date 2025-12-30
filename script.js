@@ -1,13 +1,14 @@
 // Sample projects - customize these with your own project names
 const projects = [
     "instagram",
-    "Digital Art",
-    "Portraits",
-    "Landscapes",
-    "Mixed Media",
     "form and perception @gcadd",
     "clay archive",
-    "breathing website"
+    "breathing website",
+    "ceramic 3d printer",
+    "definitely a painter",
+    "jdz china",
+    "about",
+    "contact info"
 ];
 
 // Generate a random muted putty color (contemporary car colors)
@@ -82,6 +83,16 @@ function createProjectGrid() {
                 window.location.href = "projects/abstract-series.html";
             } else if (project === "form and perception @gcadd") {
                 window.location.href = "projects/form-and-perception-gcadd.html";
+            } else if (project === "ceramic 3d printer") {
+                window.location.href = "projects/ceramic-3d-printer.html";
+            } else if (project === "definitely a painter") {
+                window.location.href = "projects/definitely-a-painter.html";
+            } else if (project === "jdz china") {
+                window.location.href = "projects/jdz-china.html";
+            } else if (project === "about") {
+                window.location.href = "about.html";
+            } else if (project === "contact info") {
+                window.location.href = "contact.html";
             } else {
                 // For other projects, create pages following the same pattern
                 alert(`Opening ${project}...`);
