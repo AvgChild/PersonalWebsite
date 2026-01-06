@@ -49,7 +49,7 @@ body {
 
 /* Left Side - Image Carousel */
 .left-side {
-    flex: 1;
+    flex: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,7 +60,7 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     aspect-ratio: 4 / 3;
 }
 
@@ -110,7 +110,7 @@ body {
 
 /* Right Side - Text Content */
 .right-side {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
