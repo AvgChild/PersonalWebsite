@@ -37,7 +37,8 @@ const projectImages = {
     "ceramic 3d printer": "images/ceramic-3d-printer/image1.jpg",
     "definitely a painter": "images/definitely-a-painter/image1.jpg",
     "jdz china": "images/jdz-china/image1.jpg",
-    "chair": "images/chair/image1.jpg"
+    "chair": "images/chair/image1.jpg",
+    "about": "images/about-me.png"
 };
 
 // Create project boxes
