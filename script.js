@@ -100,5 +100,65 @@ function createProjectGrid() {
     });
 }
 
+// Get project URL from project name
+function getProjectUrl(project) {
+    const projectUrls = {
+        "instagram": "https://www.instagram.com/matt.obj/",
+        "breathing website": "https://avgchild.github.io/Meditation-project/",
+        "clay archive": "https://clayarchive.com",
+        "Abstract Series": "projects/abstract-series.html",
+        "form and perception @gcadd": "projects/form-and-perception-gcadd.html",
+        "ceramic 3d printer": "projects/ceramic-3d-printer.html",
+        "definitely a painter": "projects/definitely-a-painter.html",
+        "jdz china": "projects/jdz-china.html",
+        "chair": "projects/chair.html",
+        "about": "about.html",
+        "contact info": "contact.html"
+    };
+    return projectUrls[project] || "#";
+}
+
+// Create hamburger menu
+function createHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuList = document.getElementById('menuList');
+
+    if (!hamburger || !menuOverlay || !menuList) return;
+
+    // Populate menu with projects
+    projects.forEach((project) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.textContent = project;
+        a.href = getProjectUrl(project);
+        li.appendChild(a);
+        menuList.appendChild(li);
+    });
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    menuList.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menuOverlay.contains(e.target) && !hamburger.contains(e.target)) {
+            hamburger.classList.remove('active');
+            menuOverlay.classList.remove('active');
+        }
+    });
+}
+
 // Initialize the grid when the page loads
-document.addEventListener('DOMContentLoaded', createProjectGrid);
+document.addEventListener('DOMContentLoaded', () => {
+    createProjectGrid();
+    createHamburgerMenu();
+});
