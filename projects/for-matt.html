@@ -134,6 +134,33 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
+
+        .exposure-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .exposure-row label {
+            font-size: 0.85rem;
+            color: #555;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .exposure-row input[type=range] {
+            flex: 1;
+            accent-color: #333;
+        }
+
+        #exposure-val {
+            font-size: 0.85rem;
+            color: #555;
+            width: 30px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -161,6 +188,12 @@
                 <div class="live-dot" id="live-dot">
                     <span class="dot"></span> LIVE
                 </div>
+            </div>
+
+            <div class="exposure-row">
+                <label>exposure</label>
+                <input type="range" id="exposure-slider" min="0.1" max="2.0" step="0.05" value="0.65" />
+                <span id="exposure-val">0.65</span>
             </div>
         </div>
     </div>
@@ -191,6 +224,20 @@
             document.getElementById('content').style.display = 'flex';
             connectStream();
         }
+
+        let exposureTimer = null;
+        document.getElementById('exposure-slider').addEventListener('input', e => {
+            const val = parseFloat(e.target.value).toFixed(2);
+            document.getElementById('exposure-val').textContent = val;
+            clearTimeout(exposureTimer);
+            exposureTimer = setTimeout(() => {
+                fetch(STREAM_URL + '/set_exposure', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ exposure: parseFloat(val) })
+                });
+            }, 150);
+        });
 
         function connectStream() {
             const img = document.getElementById('stream-img');
