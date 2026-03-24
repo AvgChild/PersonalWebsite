@@ -8,6 +8,7 @@ const projects = [
     "definitely a painter",
     "jdz china",
     "chair",
+    "for matt",
     "about",
     "contact info"
 ];
@@ -85,6 +86,8 @@ function createProjectGrid() {
                 window.location.href = "projects/jdz-china.html";
             } else if (project === "chair") {
                 window.location.href = "projects/chair.html";
+            } else if (project === "for matt") {
+                window.location.href = "projects/for-matt.html";
             } else if (project === "about") {
                 window.location.href = "about.html";
             } else if (project === "contact info") {
@@ -112,6 +115,7 @@ function getProjectUrl(project) {
         "definitely a painter": "projects/definitely-a-painter.html",
         "jdz china": "projects/jdz-china.html",
         "chair": "projects/chair.html",
+        "for matt": "projects/for-matt.html",
         "about": "about.html",
         "contact info": "contact.html"
     };

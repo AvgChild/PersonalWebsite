@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for matt</title>
+    <link rel="stylesheet" href="../project-page.css">
+    <style>
+        /* Password screen */
+        #pw-screen {
+            position: fixed;
+            inset: 0;
+            background-color: #f5f5dc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            z-index: 999;
+        }
+
+        #pw-screen h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #333;
+        }
+
+        #pw-screen input {
+            padding: 10px 16px;
+            font-size: 1rem;
+            border: 1px solid #999;
+            border-radius: 5px;
+            background: transparent;
+            text-align: center;
+            letter-spacing: 4px;
+            outline: none;
+            width: 180px;
+        }
+
+        #pw-screen button {
+            padding: 10px 28px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        #pw-screen button:hover { background-color: #555; }
+
+        #pw-error {
+            color: #a00;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        /* Stream page */
+        #content {
+            display: none;
+            flex-direction: column;
+            height: 100vh;
+            padding-top: 70px;
+        }
+
+        .stream-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 40px;
+            gap: 20px;
+        }
+
+        .stream-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #333;
+        }
+
+
+        .stream-frame {
+            width: 100%;
+            max-width: 700px;
+            aspect-ratio: 16 / 9;
+            background: #222;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #stream-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        #stream-placeholder {
+            color: #666;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .live-dot {
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: #eee;
+            letter-spacing: 1px;
+            display: none;
+        }
+
+        .live-dot span.dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e00;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Password Screen -->
+    <div id="pw-screen">
+        <h2>for matt</h2>
+        <input type="password" id="pw-input" placeholder="password" autofocus />
+        <button onclick="checkPw()">enter</button>
+        <p id="pw-error">incorrect password</p>
+    </div>
+
+    <!-- Content (hidden until unlocked) -->
+    <div id="content">
+        <nav class="back-nav">
+            <a href="../index.html" class="back-button">← Back to Portfolio</a>
+        </nav>
+
+        <div class="stream-area">
+            <h1 class="stream-title">for matt</h1>
+
+            <div class="stream-frame">
+                <p id="stream-placeholder">no stream connected</p>
+                <img id="stream-img" alt="live stream" />
+                <div class="live-dot" id="live-dot">
+                    <span class="dot"></span> LIVE
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check saved session
+        if (sessionStorage.getItem('for-matt-auth') === 'yes') unlock();
+
+        document.getElementById('pw-input').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkPw();
+        });
+
+        function checkPw() {
+            const val = document.getElementById('pw-input').value;
+            if (val === '12345') {
+                sessionStorage.setItem('for-matt-auth', 'yes');
+                unlock();
+            } else {
+                document.getElementById('pw-error').style.display = 'block';
+                document.getElementById('pw-input').value = '';
+            }
+        }
+
+        const STREAM_URL = 'https://stream.mattbranham.com';
+
+        function unlock() {
+            document.getElementById('pw-screen').style.display = 'none';
+            document.getElementById('content').style.display = 'flex';
+            connectStream();
+        }
+
+        function connectStream() {
+            const img = document.getElementById('stream-img');
+            const placeholder = document.getElementById('stream-placeholder');
+            const liveDot = document.getElementById('live-dot');
+
+            img.src = STREAM_URL + '/video_feed';
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+            liveDot.style.display = 'flex';
+
+            img.onerror = () => {
+                img.style.display = 'none';
+                placeholder.style.display = 'block';
+                placeholder.textContent = 'stream offline';
+                liveDot.style.display = 'none';
+            };
+        }
+    </script>
+
+</body>
+</html>
